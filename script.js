@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 平滑滾動功能
     document.querySelectorAll('.nav-link, .scroll-indicator a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -7,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // 添加額外的偏移量，避免內容被固定導航欄遮擋
                 const offset = 20;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - offset;
