@@ -98,6 +98,12 @@ body {
     
     -webkit-text-fill-color: transparent;
     color: transparent;
+
+    /* 降級方案 (舊版瀏覽器) */
+    @supports not (background-clip: text) {
+    background: none;
+    color: var(--neon-purple);
+  }
   }
 
 @keyframes framePulse {
@@ -265,7 +271,7 @@ body {
     }
 }
 
-/* 內容容器 */
+/* 內容 */
 .content-container {
     display: flex;
     min-height: 100vh;
