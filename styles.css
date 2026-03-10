@@ -1,68 +1,80 @@
+/* =========================================
+   1. 全域變數與基礎設定
+   定義網站的主要色系，方便統一修改
+   ========================================= */
 :root {
-    --primary-color: #6b46c1;
-    --secondary-color: #9f7aea;
-    --accent-color: #d6bcfa;
-    --neon-purple: #b794f4;
-    --dark-purple: #1e1040;
-    --cyber-blue: #00ff9d;
-    --text-color: #2d3748;
-    --background-color: #f4f6f9;
+    --primary-color: #6b46c1;       /* 主色調：深紫色 */
+    --secondary-color: #9f7aea;     /* 次色調：淺紫色 */
+    --accent-color: #d6bcfa;        /* 點綴色：亮紫色 */
+    --neon-purple: #b794f4;         /* 霓虹紫 (用於發光效果) */
+    --dark-purple: #1e1040;         /* 極深紫色 (用於側邊欄背景) */
+    --cyber-blue: #00ff9d;          /* 賽博龐克綠/藍 (用於醒目標籤) */
+    --text-color: #2d3748;          /* 一般文字顏色 */
+    --background-color: #f4f6f9;    /* 網頁底色 (淺灰色) */
 }
 
-/* 原生平滑滾動 */
+/* 啟用原生平滑滾動，點擊側邊欄連結時畫面會平順滑過去 */
 html { scroll-behavior: smooth; }
 
+/* 網頁基礎重置 */
 body { 
     margin: 0; 
     font-family: 'Segoe UI', Arial, sans-serif; 
     background-color: var(--background-color); 
     color: var(--text-color); 
-    overflow-x: hidden; 
+    overflow-x: hidden; /* 防止內容太寬出現水平滾動條 */
 }
 
-/* --- Hero Section (首頁視覺區塊) --- */
+/* =========================================
+   2. 首頁視覺區塊 (Hero Section)
+   ========================================= */
 .hero {
     min-height: 100vh; 
-    min-height: 100dvh; /* 使用 dvh 讓手機版網址列收合時高度更精確，防止文字重疊 */
-    padding-bottom: 80px; /* 留出底部空間給滾動箭頭 */
+    min-height: 100dvh; /* dvh 解決手機瀏覽器上下選單影響高度的問題，防文字重疊 */
+    padding-bottom: 80px; /* 底部留白，避免往下的箭頭和文字撞在一起 */
     width: 100%; 
     display: flex; 
     justify-content: center; 
     align-items: center;
-    background: radial-gradient(circle at center, #26164d 0%, #0a0a2e 100%);
+    background: radial-gradient(circle at center, #26164d 0%, #0a0a2e 100%); /* 漸層背景 */
     color: white; 
     position: relative; 
     overflow: hidden;
 }
 
+/* 首頁背景的動態網格 (Cyberpunk 風格) */
 .hero-grid {
     position: absolute; 
     width: 200%; 
     height: 200%;
+    /* 畫出方格線條 */
     background-image: linear-gradient(rgba(107, 70, 193, 0.15) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(107, 70, 193, 0.15) 1px, transparent 1px);
     background-size: 50px 50px; 
-    transform: perspective(500px) rotateX(60deg);
+    transform: perspective(500px) rotateX(60deg); /* 傾斜產生 3D 景深效果 */
     bottom: -20%; 
-    animation: gridMove 15s linear infinite; 
+    animation: gridMove 15s linear infinite; /* 套用無窮滾動動畫 */
     z-index: 1;
-    will-change: background-position; /* 效能優化 */
+    will-change: background-position; /* 告訴瀏覽器這裡有動畫，提升效能 */
 }
 
+/* 定義網格往前滾動的動畫 */
 @keyframes gridMove { 
     from { background-position: 0 0; } 
     to { background-position: 0 1000px; } 
 }
 
+/* 首頁內容排版容器 */
 .hero-container { 
     display: flex; 
     align-items: center; 
     gap: 4rem; 
     max-width: 1100px; 
-    z-index: 2; 
+    z-index: 2; /* 確保內容在網格上方 */
     padding: 0 2rem; 
 }
 
+/* "SYSTEM ONLINE" 閃爍徽章 */
 .status-badge { 
     display: inline-block; 
     font-family: monospace; 
@@ -75,14 +87,16 @@ body {
     border-radius: 20px; 
     animation: blink 2s infinite; 
 }
+/* 徽章閃爍動畫 (改變透明度) */
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
+/* 首頁大標題與副標題 */
 .hero h1 { 
-    font-size: clamp(3rem, 8vw, 5rem); 
+    font-size: clamp(3rem, 8vw, 5rem); /* 字體大小會隨螢幕寬度自動縮放 */
     font-weight: 800; 
     margin: 0; 
     line-height: 1.1; 
-    text-shadow: 0 0 25px rgba(183, 148, 244, 0.6); 
+    text-shadow: 0 0 25px rgba(183, 148, 244, 0.6); /* 文字發光特效 */
 }
 .hero h3 { 
     font-size: 1.5rem; 
@@ -91,6 +105,7 @@ body {
     font-weight: 300; 
 }
 
+/* 專長標籤 (# Hashtags) */
 .tech-tags { 
     display: flex; 
     gap: 1rem; 
@@ -106,26 +121,30 @@ body {
     border-radius: 6px; 
     transition: 0.3s; 
 }
+/* 滑鼠碰到標籤時發光並輕微上浮 */
 .tech-tags span:hover { 
     background: rgba(0, 255, 157, 0.2); 
     box-shadow: 0 0 10px rgba(0,255,157,0.3); 
     transform: translateY(-2px); 
 }
 
+/* 首頁個人大頭貼與懸浮特效 */
 .fullbody-portrait { width: 300px; position: relative; perspective: 1000px; }
 .fullbody-img { 
     width: 100%; 
     border-radius: 16px; 
     border: 2px solid rgba(183, 148, 244, 0.4); 
     box-shadow: 0 0 40px rgba(107, 70, 193, 0.5); 
-    animation: float 6s ease-in-out infinite; 
+    animation: float 6s ease-in-out infinite; /* 套用上下懸浮動畫 */
     object-fit: cover; 
 }
+/* 讓圖片緩慢上下浮動並輕微轉動 */
 @keyframes float { 
     0%, 100% { transform: translateY(0) rotateY(-5deg); } 
     50% { transform: translateY(-20px) rotateY(5deg); } 
 }
 
+/* 向下滾動指示器 (閃爍箭頭) */
 .scroll-indicator { 
     position: absolute; 
     bottom: 30px; 
@@ -155,13 +174,16 @@ body {
     60% {transform: translateY(-6px);} 
 }
 
-/* --- Sidebar & Main Content (側邊欄與主要內容) --- */
+/* =========================================
+   3. 側邊欄與主要內容 (Sidebar & Content)
+   ========================================= */
 .content-container { display: flex; min-height: 100vh; }
 
+/* 側邊導航欄設定 */
 .sidebar { 
     width: 260px; 
     background: linear-gradient(180deg, #0a0a2e 0%, var(--dark-purple) 100%); 
-    position: sticky; 
+    position: sticky; /* 讓側邊欄固定在螢幕上，不會隨著右邊內容滾走 */
     top: 0; 
     height: 100vh; 
     box-shadow: 5px 0 25px rgba(0,0,0,0.15); 
@@ -169,10 +191,12 @@ body {
     overflow-y: auto; 
     transition: 0.3s; 
 }
+/* 側邊欄頭像發光邊框 */
 .sidebar .border-cyber { 
     border: 2px solid var(--neon-purple); 
     box-shadow: 0 0 15px rgba(183,148,244,0.3); 
 }
+/* 側邊欄選單項目 */
 .sidebar .nav-link { 
     color: var(--accent-color); 
     padding: 12px 20px; 
@@ -180,18 +204,24 @@ body {
     font-weight: 500; 
     transition: all 0.3s ease; 
 }
+/* 滑鼠碰到選單時向右推移並亮起 */
 .sidebar .nav-link:hover { 
     background: rgba(183,148,244,0.15); 
     transform: translateX(8px); 
     color: #fff; 
-    box-shadow: -4px 0 0 var(--cyber-blue); 
+    box-shadow: -4px 0 0 var(--cyber-blue); /* 左側顯示亮綠色指示線 */
 }
+/* 側邊欄社群圖標 */
 .social-icon { color: var(--accent-color); transition: 0.3s; }
 .social-icon:hover { color: var(--cyber-blue); transform: scale(1.1) translateY(-3px); }
 
+/* 右側主要內容區塊排版 */
 .content { flex: 1; padding: 3rem 5rem; max-width: 1400px; margin: 0 auto; }
 
-/* --- Section & Cards (區塊與卡片) --- */
+/* =========================================
+   4. 內容區塊元件 (標題、卡片、進度條、按鈕)
+   ========================================= */
+/* 區段標題底下的漸層裝飾線 */
 .section-title { 
     color: var(--primary-color); 
     font-weight: 800; 
@@ -212,6 +242,7 @@ body {
 }
 .text-cyber-purple { color: var(--primary-color); }
 
+/* 基礎卡片樣式 */
 .card { 
     border: none; 
     border-radius: 16px; 
@@ -219,6 +250,7 @@ body {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
 }
 .feature-card { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+/* 懸浮卡片 (例如教育、證照) 滑過時往上浮動並發出紫光 */
 .hover-card:hover { 
     transform: translateY(-8px); 
     box-shadow: 0 15px 35px rgba(107, 70, 193, 0.15); 
@@ -230,7 +262,7 @@ body {
     border-radius: 16px 16px 0 0; 
 }
 
-/* Progress Bars (進度條) */
+/* 技能進度條設計 */
 .skill-item { margin-bottom: 1.2rem; }
 .skill-item span { font-weight: 600; display: inline-block; margin-bottom: 5px; font-size: 0.95rem; }
 .progress { height: 8px; border-radius: 10px; background-color: #e2e8f0; overflow: visible; }
@@ -240,7 +272,7 @@ body {
     box-shadow: 0 0 10px rgba(107,70,193,0.4); 
 }
 
-/* Buttons (按鈕) */
+/* 按鈕樣式 (實心按鈕) */
 .btn-cyber { 
     background: linear-gradient(45deg, var(--primary-color), var(--neon-purple)); 
     color: white; 
@@ -255,6 +287,7 @@ body {
     box-shadow: 0 5px 15px rgba(107, 70, 193, 0.4); 
     color: white; 
 }
+/* 按鈕樣式 (空心外框按鈕) */
 .btn-outline-cyber { 
     border: 2px solid var(--primary-color); 
     color: var(--primary-color); 
@@ -268,17 +301,25 @@ body {
     box-shadow: 0 5px 15px rgba(107, 70, 193, 0.3); 
 }
 
-/* --- Scroll Reveal Animation (滑動浮現動畫) --- */
+/* =========================================
+   5. 滾動浮現動畫 (Scroll Reveal Animation)
+   配合 JavaScript 觸發
+   ========================================= */
+/* 初始狀態：往下沉 40px 並透明 */
 .reveal { 
     opacity: 0; 
     transform: translateY(40px); 
     transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); 
 }
+/* 觸發狀態 (JS 會加上 active)：浮回原位並完全顯示 */
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* --- Responsive (手機版優化) --- */
+/* =========================================
+   6. 響應式設計 (手機與平板版面優化)
+   當螢幕寬度小於或等於 992px 時執行
+   ========================================= */
 @media (max-width: 992px) {
-    /* 首頁內容微調，縮小間距與圖片，避免塞爆螢幕 */
+    /* 首頁內容微調，避免擠壓重疊 */
     .hero { padding-top: 2rem; }
     .hero-container { 
         flex-direction: column; 
@@ -289,32 +330,32 @@ body {
     }
     .hero h1 { font-size: 3.5rem; }
     .tech-tags { justify-content: center; gap: 0.5rem; }
-    .fullbody-portrait { width: 180px; } /* 縮小手機版照片尺寸 */
+    .fullbody-portrait { width: 180px; } /* 縮小大頭貼 */
     
     .content-container { flex-direction: column; }
     
-    /* 讓側邊欄變成頂部固定導航列 (Sticky Top Nav) */
+    /* 側邊欄變身為「頂部吸附導航列 (Sticky Navbar)」 */
     .sidebar { 
         width: 100%; 
         height: auto; 
-        position: sticky; /* 關鍵：讓導航列吸頂 */
+        position: sticky; /* 讓它往下滑時吸附在螢幕頂部 */
         top: 0; 
         padding: 10px 15px !important; 
         flex-direction: row !important; 
         align-items: center; 
         justify-content: center; 
         z-index: 999; 
-        /* 加上毛玻璃與暗色背景，避免和下方內文重疊時看不清 */
+        /* 增加半透明毛玻璃特效，背景不會與內文混在一起 */
         background: rgba(10, 10, 46, 0.95);
         backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); /* 支援 Safari */
+        -webkit-backdrop-filter: blur(10px); /* 支援 Safari 瀏覽器 */
         border-bottom: 1px solid rgba(183, 148, 244, 0.3);
     }
     
-    /* 隱藏佔空間的元素 */
+    /* 隱藏佔空間的元素 (頭像、標題、社群) */
     .sidebar img, .sidebar h2, .sidebar .social-links, .sidebar hr { display: none !important; }
     
-    /* 選單變成橫向排列 */
+    /* 手機版選單橫向排列縮小 */
     .sidebar .nav { 
         flex-direction: row !important; 
         justify-content: center; 
@@ -329,13 +370,14 @@ body {
         font-size: 0.85rem; 
         border-radius: 6px; 
     }
-    .sidebar .nav-link i { margin-right: 4px !important; } /* 縮小 icon 和文字的距離 */
+    .sidebar .nav-link i { margin-right: 4px !important; }
+    /* 取消手機上點擊的推移效果，改成變色就好 */
     .sidebar .nav-link:hover { 
         transform: translateY(-2px); 
         box-shadow: none; 
         background: rgba(183,148,244,0.2); 
     }
     
-    /* 內容區塊微調 */
+    /* 調整主要內容的內距，符合手機閱讀比例 */
     .content { padding: 2rem 1.5rem; }
 }

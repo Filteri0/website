@@ -1,26 +1,42 @@
 <!DOCTYPE html>
+<!-- 宣告這是一個 HTML5 文件，並設定語言為繁體中文 -->
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <!-- 設定響應式視角，讓網頁在手機上能正確縮放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CKAi 個人網頁</title>
+    
+    <!-- 引入 Bootstrap 5 (提供排版網格、卡片、按鈕、Modal 等 UI 元件) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 FontAwesome (提供網站中的各類小圖標，例如首頁、FB、IG 的 icon) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- 引入自訂的 CSS 樣式表 -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 首頁視覺區塊 -->
+    
+    <!-- ==========================================
+         首頁視覺區塊 (Hero Section)
+         打開網站第一眼看到的滿版畫面
+         ========================================== -->
     <header class="hero" id="hero">
+        <!-- 背景的動態科技網格 -->
         <div class="hero-grid"></div>
+        
+        <!-- 首頁主要內容 (大頭貼與文字介紹) -->
         <div class="hero-container">
+            <!-- 大頭貼區域 -->
             <div class="fullbody-portrait">
                 <div class="portrait-frame"></div>
                 <img src="pic/pic.jpg" alt="CKAi 李睿凱" class="fullbody-img">
             </div>
+            <!-- 文字與標籤區域 -->
             <div class="hero-text">
                 <div class="status-badge">● SYSTEM ONLINE</div>
                 <h1>CKAi</h1>
                 <h3>李睿凱 RUI-KAI, LI</h3>
+                <!-- 專長標籤 -->
                 <div class="tech-tags">
                     <span># Machine_Learning</span>
                     <span># Information_Security</span>
@@ -28,17 +44,27 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 提示往下滑動的閃爍箭頭 -->
         <div class="scroll-indicator">
             <span class="scroll-text">SCROLL TO EXPLORE</span>
             <a href="#home">▼</a>
         </div>
     </header>
 
+    <!-- 包含側邊欄與主要內容的超級大容器 -->
     <div class="content-container">
-        <!-- 側邊欄 -->
+        
+        <!-- ==========================================
+             側邊欄導航 (Sidebar)
+             電腦版在左側，手機版會變成頂部導航列
+             ========================================== -->
         <aside class="sidebar d-flex flex-column p-4">
             <h2 class="text-white text-center fs-4 fw-bold mb-4">CKAi Space</h2>
+            <!-- 側邊欄大頭貼 -->
             <img src="pic/pic.jpg" alt="個人照片" class="img-fluid rounded-circle mb-4 shadow-lg border-cyber">
+            
+            <!-- 網站導航選單 (點擊會跳轉到對應 ID 的區塊) -->
             <ul class="nav flex-column mb-auto gap-2">
                 <li class="nav-item"><a class="nav-link" href="#hero"><i class="fas fa-home fa-lg me-3"></i>首頁</a></li>
                 <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-user fa-lg me-3"></i>關於我</a></li>
@@ -46,6 +72,8 @@
                 <li class="nav-item"><a class="nav-link" href="#portfolio"><i class="fas fa-briefcase fa-lg me-3"></i>作品集</a></li>
                 <li class="nav-item"><a class="nav-link" href="#certificates"><i class="fas fa-certificate fa-lg me-3"></i>專業證照</a></li>
             </ul>
+            
+            <!-- 社群連結圖標 -->
             <div class="social-links d-flex justify-content-center gap-4 mt-4">
                 <a href="https://www.facebook.com/profile.php?id=100014257416811" class="social-icon" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
                 <a href="https://www.instagram.com/__filteri__/" class="social-icon" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
@@ -53,12 +81,17 @@
             </div>
         </aside>
 
-        <!-- 主要內容區 -->
+        <!-- ==========================================
+             主要內容區 (Main Content)
+             包含關於我、教育、作品集、證照等區塊
+             ========================================== -->
         <main class="content">
-            <!-- 關於我 -->
+            
+            <!-- 1. 關於我區塊 (加入 .reveal 讓它有滾動浮現特效) -->
             <section id="home" class="py-5 reveal">
                 <h2 class="section-title">About Me</h2>
                 <div class="row g-4">
+                    <!-- 左半部：個人簡介 -->
                     <div class="col-lg-8">
                         <div class="card h-100 feature-card">
                             <div class="card-body p-4 row align-items-center">
@@ -76,6 +109,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 右半部：技能進度條 -->
                     <div class="col-lg-4">
                         <div class="card h-100 feature-card">
                             <div class="card-body p-4">
@@ -93,11 +127,11 @@
                 </div>
             </section>
             
-            <!-- 教育背景 -->
+            <!-- 2. 教育背景區塊 -->
             <section id="education" class="py-5 reveal">
                 <h2 class="section-title">教育背景</h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
-                    <!-- 使用 array 映射減少重複，為保持 HTML 直觀這裡直接寫出 -->
+                    <!-- loading="lazy" 是為了圖片延遲載入，提升網頁開啟速度 -->
                     <div class="col">
                         <div class="card h-100 hover-card">
                             <img src="education/nzjh.png" class="card-img-top bg-light" alt="南榮國中" loading="lazy">
@@ -145,13 +179,13 @@
                 </div>
             </section>
 
-            <!-- 作品集 -->
+            <!-- 3. 作品集區塊 -->
             <section id="portfolio" class="py-5 reveal">
                 <h2 class="section-title">作品集</h2>
                 <div class="card feature-card">
                     <div class="card-body p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
                         <div>
-                            <h4 class="fw-bold text-dark mb-2">🛡️ 反詐圖文掃描機</h4>
+                            <h4 class="fw-bold text-dark mb-2">反詐圖文掃描機</h4>
                             <p class="mb-1 text-muted"><i class="fas fa-check-circle text-success me-2"></i>功能 1：使用手機拍照廣告圖片可以辨識是否為詐騙。</p>
                             <p class="mb-0 text-muted"><i class="fas fa-check-circle text-success me-2"></i>功能 2：可以查詢是否為詐騙網址或詐騙 Line ID。</p>
                         </div>
@@ -160,10 +194,11 @@
                 </div>
             </section>
 
-            <!-- 證照 -->
+            <!-- 4. 專業證照區塊 -->
             <section id="certificates" class="py-5 reveal">
                 <h2 class="section-title">專業證照</h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <!-- data-* 屬性是用來把資料傳給 JavaScript 的 Modal 彈窗顯示用的 -->
                     <div class="col">
                         <div class="card h-100 hover-card">
                             <img src="certificates/AWSCertifiedAIPractitionerEarlyAdopter.png" class="card-img-top p-4 bg-light" alt="AWS AI Practitioner" loading="lazy">
@@ -196,14 +231,19 @@
         </main>
     </div>
 
-    <!-- 證書 Modal -->
+    <!-- ==========================================
+         證書 Modal (隱藏的彈出視窗)
+         當點擊「查看詳細」時，JS 會把這裡的內容替換並顯示出來
+         ========================================== -->
     <div class="modal fade" id="certificateModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg">
+                <!-- 彈窗頭部 -->
                 <div class="modal-header bg-dark text-white border-0">
                     <h5 class="modal-title fw-bold" id="certificateModalLabel"></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <!-- 彈窗內容區 -->
                 <div class="modal-body text-center p-4">
                     <img id="certificateModalImage" class="img-fluid rounded mb-4 shadow-sm" src="" alt="Certificate">
                     <div class="text-start bg-light p-3 rounded">
@@ -216,7 +256,9 @@
         </div>
     </div>
 
+    <!-- 引入 Bootstrap 的 JavaScript (負責選單、Modal 彈窗等動態效果) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 引入我們自己寫的動態效果腳本 -->
     <script src="script.js"></script>
 </body>
 </html>
